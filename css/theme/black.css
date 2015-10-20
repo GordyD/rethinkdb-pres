@@ -282,3 +282,7 @@ body {
  *********************************************/
 .reveal .slide-number {
   color: #42affa; }
+
+.strike {
+  text-decoration: line-through;
+}

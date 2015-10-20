@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="utf-8">
 
-		<title>RethinkDB - The batabase for the Realtime web</title>
+		<title>Rethinking Hiring: Workshape.io's journey with RethinkDB</title>
 
 		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
 		<meta name="author" content="Hakim El Hattab">
@@ -15,7 +15,8 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
 
 		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/black.css" id="theme">
+		<link rel="stylesheet" href="css/theme/white.css" id="theme">
+		<link rel="stylesheet" href="css/pres.css">
 
 		<!-- Code syntax highlighting -->
 		<link rel="stylesheet" href="lib/css/zenburn.css">
@@ -41,242 +42,294 @@
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
 				<section>
-					<h1>RethinkDB</h1>
-					<h3>The database for the Realtime Web</h3>
+					<img class="splash" height="110" data-src="images/title.png" alt="Rethinking Hiring">
+					<h4 class="lowercase">Workshape.io's journey with RethinkDB</h4>
 					<p>
 						<small><a href="http://www.gordondent.co.uk">Gordon Dent</a> / <a href="http://www.workshape.io">workshape.io</a> / <a href="http://twitter.com/gordymd">@gordyMD</a></small>
 					</p>
-					<img class="logo" width="640" height="360" data-src="https://i.imgur.com/ZbBbpJq.png" alt="Thinky">
+					<img class="splash" width="946" height="416" data-src="images/splash.png" alt="Splash">
 					<aside class="notes">
 						<ul>
 							<li>Welcome</li>
-							<li>I'm Gordon, CTO of Workshape.io - A talent matching service for developers and tech companies</li>
-							<li>We've used RethinkDB in production now for 8 months now, with approximately 800k documents across 3 nodes</li>
-							<li>We currently use RethinkDB to power our live analytics board</li>
-							<li>Given as this is the 1st RethinkDB meetup I wanted to give an introductory talk to why RethinkDB is great and one of its more powerful use cases</li>
+							<li>I'm Gordon, CTO of Workshape.io</li>
+							<li>I'm here to talk to you about our experiences at Workshape.io with RethinkDB</li>
+							<li>You can find me on twitter @GordyMD and on Github at @GordyD</li>
 						</ul>
 					</aside>
 				</section>
 
 				<section>
-					<h2>Overview</h2>
-					<img class="logo" width="480" height="480" data-src="http://media.giphy.com/media/PSCSV8HjTOXQY/giphy.gif" alt="Thinky">
-					<aside class="notes">
-						<ul>
-							<li>Realtime</li>
-							<li>Common approaches</li>
-							<li>Problems</li>
-							<li>RethinkDB's approach</li>
-							<li>The .changes() API</li>
-							<li>Demo</li>
-							<li>Questions</li>
-						</ul>
-					</aside>
-				</section>
-
-				<section>
-					<h2>The realtime web today</h2>
-					<h5>Examples</h5>
-					<img class="logo" width="120" height="120" data-src="images/facebook-logo.png" alt="Facebook">
-					<img class="logo" width="120" height="120" data-src="images/twitter-logo.png" alt="Twitter">
-					<img class="logo" width="270" height="120"data-src="images/google-analytics.png" alt="Google Analytics">
-					<img class="logo" width="120" height="120" data-src="images/google-docs-logo.png" alt="Google Docs">
-					<img class="logo" width="180" height="120" data-src="images/bbc-logo.jpeg" alt="BBC">
-					<h5>Tools</h5>
-					<img class="logo" width="360" height="80" data-src="images/firebase-logo.png" alt="Firebase">
-					<img class="logo" width="360" height="80" data-src="images/meteor-logo.png" alt="Meteor">
-					<img class="logo" width="360" height="90" data-src="images/pusher-logo.png" alt="Pusher">
-					<img class="logo" width="360" height="90" data-src="images/pubnub-logo.png" alt="PubNub">
-					<aside class="notes">
-						<ul>
-							<li>There are lots of services today that run on real-time, or pseudo real-time infrastructure</li>
-							<li>You've got the recognisable powerhouses and services</li>
-							<li>And then there are all the other, chat, analytics, finance, collaboratiion and gaming tools to consider</li>
-							<li>A lot of startups have sprung up to address the growing demand for supporting this</li>
-						</ul>
-					</aside>
-				</section>
-				<section>
-					<h2>It is quite a big deal!</h2>
-					<aside class="notes">
-						<ul>
-							<li>With consumers wanting access to information faster and faster the real time applications are a growing trend</li>
-						</ul>
-					</aside>
-				</section>
-				<section>
-					<h2>The realtime web tomorrow</h2>
-					<img class="logo fragment" data-src="http://theconnectivist-img.s3.amazonaws.com/wp-content/uploads/2014/05/Unknown.png" alt="IoT">
-					<aside class="notes">
-						<ul>
-							<li>With the Internet of Things blossoming, the amount of connected devices is set to pass 50B by 2020</li>
-							<li>With this huge increase in connectivity, the uses and applications of real-time applications is undoubtedly going to go</li>
-							<li>With big use case areas in: autonomous vehicles, medical devices, biometric devices to name a few</li>
-						</ul>
-					</aside>
-				</section>
-				<section>
-					<h2>It is going to be</h2>
-					<h1>HUGE!</h1>
-					<aside class="notes">
-						<ul>
-							<li>With the level of growth in thr IoT, there is going to be lots more of it</li>
-						</ul>
-					</aside>
-				</section>
-				<section>
-					<h2>Common approaches without RethinkDB</h2>
-					<img class="logo" width="739" height="380" data-src="http://media.giphy.com/media/gHKolJsk5slpK/giphy.gif" alt="Krillin vs Cell">
-					<aside class="notes">
-						<ul>
-							<li>Realtime web, and it's pseudo sibling has been an evolving space in web development for the past 10-15 years</li>
-							<li>I'm going to run through a few of the common approaches quickly</li>
-						</ul>
-					</aside>
-				</section>
-
-				<section>
-					<h2>Short Polling</h2>
-					<img class="logo" data-src="images/short-polling.png" alt="Short Polling">
-					<aside class="notes">
-						<ul>
-							<li>First we have Short Polling</li>
-							<li>The client periodically requests an update from the server</li>
-							<li>Which in turn queries the DB and sends back the results, whether changed or not</li>
-							<li>This is still commonly used in a lot of non-critical systems</li>
-						</ul>
-					</aside>
-				</section>
-
-				<section>
-					<h2>Long Polling</h2>
-					<img class="logo" data-src="images/long-polling.png" alt="Long Polling">
-					<aside class="notes">
-						<ul>
-							<li>A slightly more varied approach</li>
-							<li>The client periodically requests an update from the server</li>
-							<li>Which in turn queries the DB and sends back the results, whether changed or not</li>
-						</ul>
-					</aside>
-				</section>
-
-				<section>
-					<h2>Web Sockets + Replication Log</h2>
-					<img class="logo" data-src="images/web-sockets+oplog.png" alt="Web Sockets + Op Log">
-				</section>
-
-				<section>
-					<h2>Using Realtime Sync APIs</h2>
-					<img class="logo" data-src="images/sync-apis.png" alt="Realtime Sync APIS">
-				</section>
-
-				<section>
-					<h2>There are many pitfalls</h2>
-					<h5>(with non-RethinkDB approaches)</h5>
+					<img class="splash" height="150" data-src="images/banner-reversed.png" alt="Workshape.io">
 					<ul>
-						<li class="fragment">Limited</li>
-						<li class="fragment">Hacky</li>
-						<li class="fragment">Hard to scale</li>
-						<li class="fragment">Error prone</li>
+						<li>Launched in late 2014</li>
+						<li>Hiring platform for Engineers</li>
+						<li>Uses RethinkDB since prototype</li>
 					</ul>
 					<aside class="notes">
-        		Whilst this approaches work they come with their pitfalls.
-
-        		Only solves simple use cases
-
-        		It often feels hacky
-
-        		If you go down the oplog route, you have to manage a lot of complexity
-
-        		Typical error prone when taking on work outside the scope of your application
-
-        		Increasingly complex when you want to operate at scale
-
-    			</aside>
+						<ul>
+							<li>Rethinking hiring</li>
+							<li>Born out of the collective frustration we’ve had with hiring and being hired</li>
+							<li>We are a talent matching platform for sofrware engineers</li>
+							<li>We optimise the initial hiring conversation by matching developer to opportunity based on what they want to do next</li>
+						</ul>
+					</aside>
 				</section>
-
 				<section>
-					<h2>Enter RethinkDB...</h2>
-					<img class="logo fragment" width="600" height="450" data-src="http://media.giphy.com/media/fl64nCT0R0K0U/giphy.gif" alt="Woo!">
-					<aside class="notes">
-        		Rethink DB - NoSQL, Open Source
-
-        		Built for Developers and Dev-ops
-
-        		Priotises use of ease
-
-        		It's primary use case is for realtime apps
-
-        		Based on push architecture
-
-        		The API enables streaming changes on collections and queries
-
-    			</aside>
-				</section>
-
-				<section>
-					<h2>Using the .changes() API</h2>
-					<img class="logo" data-src="images/rethinkdb.png" alt="RethinkDB">
-				</section>
-
-				<section>
-					<h2>Code Snippet</h2>
-					<pre><code data-trim contenteditable>
-						r.table('characters')
- .orderBy({index: r.desc('maxStrength')})
- .limit(10)
- .changes()
- .run(conn, function(err, cursor) {
-   cursor.each(function(err, changes) {
-     io.emit('update-leaderboard', changes);
-   });
- });
-          </code></pre>
-
-          <aside class="notes">
-						One of the strongest USPs of RethinkDB, in all aspects, is its ease of use. Their embedded query language
-						makes writing db queries as easy as picking up a new library in your language of choice. Following on from this
-						tak Dan will be showing the gorethinkdb driver to give a taste.
-
-						This ease of use is quite frankly outrageous when it comes to getting notified on changes, you just add .changes()
-						to a subset of supported functions in order to create a stream of changes whenever something relevant has been updated.
-						Issues of scale and complexity are dealt with by RethinkDB, you just focus on what you want to serve in real-time, and it just works.
-
-        		You can use: filter, map, pluck, min, max, orderBy, limit
-
-						Other API endpoints, like joins are being worked on by the RethinkDB team
-    			</aside>
-				</section>
-
-				<section>
-					<h2>Demo</h2>
-					<div class="fragment">
-						<img class="logo" width="85" height="85" data-src="images/angular-logo.png" alt="Angular">
-						<span class="addition"> + </span>
-						<img class="logo" width="175" height="85" data-src="images/socketio-logo.png" alt="SocketIO">
-						<span class="addition"> + </span>
-						<img class="logo small-bump" width="180" height="45" data-src="images/express-logo.png" alt="Express">
-						<span class="addition"> + </span>
-						<img class="logo small-bump" width="180" height="45" data-src="images/rethinkdb-logo.png" alt="RethinkDB">
-						<span class="addition"> = </span>
-					</div>
-					<img class="logo fragment" width="480" height="288" data-src="http://media.giphy.com/media/p2BqcMGysholi/giphy.gif" alt="PowerUp!">
+					<img class="splash" height="110" data-src="images/setting-scene.png" alt="Setting the Scene">
 					<aside class="notes">
 						<ul>
-							<li>So I can't just say that without some kind of demo!</li>
-							<li>Here's a little game made for to accompany this talk</li>
-							<li>I'm going to quickly run through the code - it's all in JS</li>
-							<li>Then we'll jump to game.workshape.io to check it out in action!</li>
+							<li>Before starting Workshape.io I was...</li>
+							<li>Predominantely SQL oriented developer, with an increasing frustration towards ORMs</li>
+							<li>The rigidity of SQL databases and normalised databases and effect on velocity</li>
+							<li>But did not see the NoSQL options like MongoDB/Couchbase as viable options - poor Query language, non-relational</li>
 						</ul>
-    			</aside>
+					</aside>
+				</section>
+				<section>
+					<img class="splash" height="110" data-src="images/new-beginning.png" alt="A New Beginning">
+					<aside class="notes">
+						<ul>
+							<li>Developer Experience</li>
+							<li>Fast Iteration</li>
+							<li>Flexibility<li>
+						</ul>
+					</aside>
+				</section>
+				<section data-autoslide="500">
+					<img class="splash" height="110" data-src="images/decisions.png" alt="Decisions, Decisions">
+					<div>
+						<img class="fragment splash" height="100" data-src="images/postgresql.png" data-fragment-index="7" data-autoslide="450">
+						<img class="fragment splash" height="100" data-src="images/mysql.png" data-fragment-index="1" data-autoslide="450">
+					</div>
+					<div>
+						<img class="fragment splash" height="100" data-src="images/mongodb.png" data-fragment-index="8" data-autoslide="450">
+						<img class="fragment splash" height="100" data-src="images/couchdb.png" data-fragment-index="10" data-autoslide="30000">
+						<img class="fragment splash" height="100" data-src="images/rethinkdb-logo.png" data-fragment-index="4" data-autoslide="450">
+					</div>
+					<div>
+						<img class="fragment splash" height="100" data-src="images/neo4j.png" data-fragment-index="6" data-autoslide="450">
+						<img class="fragment splash" height="100" data-src="images/titandb.png" data-fragment-index="9" data-autoslide="450">
+						<img class="fragment splash" height="100" data-src="images/orientdb.png" data-fragment-index="5" data-autoslide="450">
+					</div>
+					<div>
+						<img class="fragment splash" height="100" data-src="images/cassandra.jpeg" data-fragment-index="3" data-autoslide="450">
+						<img class="fragment splash" height="100" data-src="images/redis.png" data-fragment-index="2" data-autoslide="450">
+					</div>
+					<aside class="notes">
+						<ul>
+							<li>A number of options on table</li>
+							<li>Relational, document, graph and and key value stores</li>
+							<li>But with the key focus on Developer Experience and fast iteration</li>
+						</ul>
+					</aside>
+				</section>
+				<section>
+					<img class="splash" height="110" data-src="images/rethinkdb2013.png" alt="RethinkDB in 2013!">
+					<img class="splash" height="550" data-src="images/screen-shot.png" alt="Wayback then!">
+					<aside class="notes">
+						<ul>
+							<li>In mid to late 2013 when Workshape was first conceived. The RethinkDB homepage looked like this...</li>
+							<li>On trialling other options and evaluating based on the principles stated before</li>
+							<li>RethinkDB struck a chord, not just with it's powerful name, but with its features that focussed on improving my experience as an engineer, especially on a new prototype</li>
+						</ul>
+					</aside>
+				</section>
+				<section>
+					<img class="splash" height="110" data-src="images/schema.png" alt="Go away Schema!">
+					<img class="splash" height="550" data-src="images/no_schema.png" alt="Right now!">
+					<aside class="notes">
+						<ul>
+							<li>One of the core tennants of document stores is that you can store whatever documents you want, with any structure</li>
+							<li>The lack of requirement to reason ahead of time about data modelling was a strong component of all document stores</li>
+							
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<img class="splash" height="110" data-src="images/embedded.png" alt="Ooo, Embedded Query Language">
+					<pre><code class="javascript hljs">
+	r
+	.db( 'wsdev' )
+	.table( 'matches' )
+	.getAll( 'isnt-this-nice', { index: 'organisation_id' } )
+	.filter( row => row( 'expiry' ).gt( r.now() ) )
+	.orderBy( r.desc( 'score' ) )
+	.limit( 10 )
+					</code></pre>
+					<aside class="notes">
+						<ul>
+							<li>What complimented this perfectly though was the fact that you could write queries using an query API in your language of choice</li>
+							<li>This minimised the amount of context switching, prevalent when working with raw SQL</li>
+							<li>It had the ease of use of an ORM but with zero obfuscation of an underlying Query Language</li>
+							<li>It's there at your fingertips, in many languages, officially supported in Javascript, Ruby, Python, and soon Java</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<img class="splash" height="110" data-src="images/other-data.png" alt="Other data can join in too!">
+					<pre><code class="javascript hljs">
+	r
+	.db( 'wsdev' )
+	.table( 'matches' )
+	.getAll( 'isnt-it-just', { index: 'organisation_id' } )
+	.filter( row => row( 'expiry' ).gt( r.now() ) )
+	.eqJoin( 'person_id', r.table('person'))
+	.pluck({ 
+	  left: [ 'id', 'score', 'created', 'person_id' ], 
+	  right: [ 'first_name', 'last_name', 'title' ]
+	})
+	.zip()
+	.orderBy( r.desc( 'score' ) )
+	.limit( 10 )
+					</code></pre>
+					<aside class="notes">
+						<ul>
+							<li>Unlike other document stores where you have to either nest data, or just make 2 queries to the DB, the convenience of joins was another selling point</li>
+						</ul>
+					</aside>
+				</section>
+				
+				
+				<section>
+					<img class="splash" height="110" data-src="images/not-to-mention.png" alt="Not to mention...">
+					<ul>
+						<li>Horizontal Scaling</li>
+						<li>Geospatial Functionality</li>
+						<li>Powerful GUI</li>
+					</ul>
+					<aside class="notes">
+						<ul>
+							<li>The ease of scaling was another worthy highlight but not immediate to our concerns</li>
+							<li>Although, having experience scaling up MySQL and PostgreSQL clusters, the simplicity of this is incredible</li>
+							<li>Geospatial functionality being present was very important for leveraging ReQL to handle the weight of our matching algorithm</li>
+							<li>The clean, simple, but powerful GUI was a nice to have too</li>
+						</ul>
+					</aside>
+				</section>
+				<section>
+					<img class="splash" height="350" data-src="images/dx.png" alt="Developer Experience!" data-autoslide="2450" data-fragment-index="1">
+					<img class="splash dx1 fragment" height="30" data-src="images/Community.png" alt="Developer Experience!"  data-autoslide="850" data-fragment-index="2">
+					<img class="splash dx2 fragment" height="30" data-src="images/Support.png" alt="Developer Experience!"  data-autoslide="850" data-fragment-index="3">
+					<img class="splash dx3 fragment" height="30" data-src="images/Usability.png" alt="Developer Experience!"  data-autoslide="850" data-fragment-index="4">
+					<img class="splash dx4 fragment" height="25" data-src="images/Education.png" alt="Developer Experience!"  data-autoslide="850" data-fragment-index="5">
+					<img class="splash dx5 fragment" height="25" data-src="images/Documentation.png" alt="Developer Experience!"  data-autoslide="30050" data-fragment-index="6">
+					<aside class="notes">
+						<ul>
+							<li>It was clear to me that Developer Experience was at the heart of RethinkDB</li>
+							<li>Much like Workshape.io RethinkDB put the developer first</li>
+							<li>Even their website was optimised to encourage usage right from the beginning, to learn from the experience</li>
+							<li>If you haven't done this yourself I'd really encourage it</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<img class="splash" height="110" data-src="images/current-setup.png" alt="Out Current Setup!">
+					<ul>
+						<li>3 node cluster</li>
+						<li>Around 500k documents stored</li>
+						<li>Usage of Changefeeds for Analytics</li>
+					</ul>
+					<aside class="notes">
+						<ul>
+							<li></li>
+							
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<img class="splash" height="110" data-src="images/lessons.png" alt="Lessons Learned!">
+					<ul>
+						<li>Use secondary indexes and getAll()</li>
+						<li>Do not use innerJoin()</li>
+						<li>Run 3 servers for High Availability</li>
+						<li>&gt;2 GB RAM</li>
+						<li>r.http()</li>
+					</ul>
+					<aside class="notes">
+						<ul>
+							<li></li>
+							
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<img class="splash" height="110" data-src="images/rethinkdb-today.png" alt="RethinkDB Today!">
+					<img class="splash" height="550" data-src="images/screen-shot2.png" alt="Right now!">
+					<aside class="notes">
+						<ul>
+							<li></li>
+							
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<img class="splash" height="110" data-src="images/changefeed-api.png" alt="Changefeed API">
+					
+					<aside class="notes">
+						<ul>
+							<li>The introduction of Changefeeds, which at first was meant for integration for other realtime systems, was a very exciting development</li>
+							<li>Whilst we use the feature on our Analytics, we plan to adapt more of this functionality in the future to power more realtime aspects our site: match notifications,
+							messages, user online presence, inline updates to match scores</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<img class="splash" height="110" data-src="images/graph-ql.png" alt="A GraphQL Extension?">
+					
+					<aside class="notes">
+						<ul>
+							<li>There has been talk RethinkDB's Github Issues about options for a GraphQL extension</li>
+							<li>Whilst how this concludes is yet to be determined, this kind of dialogue with the community captures the core essence of RethinkDB</li>
+							<li>It is very exciting to see the technology evolve and respond to changes in other areas of software development</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<img class="splash" height="110" data-src="images/3ree-stack.png" alt="The 3REE Stack">
+					<div>
+						<ul>
+							<li>React</li>
+							<li>Redux</li>
+							<li>RethinkDB</li>
+							<li>Express</li>
+						</ul>
+					</div>
+					<p>
+						<small><a href="https://github.com/gordyd/3ree">https://github.com/GordyD/3ree</a></small>
+					</p>
+					
+					<aside class="notes">
+						<ul>
+							<li>I wrote a blog post a few weeks ago about a potential stack that we are looking to adopt.</li>
+							<li>It brings together the 3 Re's of the Javascript world that all have strong focus on Developer Experience</li>
+							<li>With this being something we attach a lot of importance in. We are very excited to begin refactoring towards this approach.</li>
+						</ul>
+					</aside>
 				</section>
 
 				<section>
 					<h2>Thank you</h2>
-					<img class="logo fragment" width="500" height="282" data-src="http://media.giphy.com/media/3o85xCyoIze7YOLhfO/giphy.gif" alt="Angry">
+					<p>
+						<small><a href="http://www.gordondent.co.uk">Gordon Dent</a> / <a href="http://www.workshape.io">workshape.io</a> / <a href="http://twitter.com/gordymd">@gordyMD</a></small>
+
+					</p>
+					<img class="splash rounded" height="282" data-src="images/workshape-logo.png" alt="Workshape Logo">
+					<aside class="notes">
+						<ul>
+							<li>Thank you for listening</li>
+							<li>You can find me on Twitter at @GordyMD or you can hit me up on workshape.io</li>
+						</ul>
+    			</aside>
 				</section>
 			</div>
-
 		</div>
 
 		<script src="lib/js/head.min.js"></script>
@@ -291,7 +344,7 @@
 				progress: true,
 				history: true,
 				center: true,
-
+				fragments: true,
 				transition: 'slide', // none/fade/slide/convex/concave/zoom
 
 				// Optional reveal.js plugins

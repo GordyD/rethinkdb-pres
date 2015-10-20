@@ -1,0 +1,43 @@
+.reveal section img.splash {
+  padding: 0;
+  box-shadow: none;
+  border: none;
+  margin-top: 0px;
+}
+
+.reveal .lowercase {
+  text-transform: none !important;
+}
+
+.rounded {
+  border-radius: 141px;
+}
+
+.dx1, .dx2, .dx3, .dx4, .dx5 {
+  position: absolute;
+}
+
+.dx5 {
+  top: 160px;
+  left: -90px;
+}
+
+.dx3 {
+  top: -80px;
+  left: 400px;
+}
+
+.dx4 {
+  top: 160px;
+  left: 850px;
+}
+
+.dx2 {
+  top: 430px;
+  left: 750px;
+}
+
+.dx1 {
+  top: 430px;
+  left: 10px;
+}
