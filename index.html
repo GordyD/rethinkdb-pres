@@ -243,7 +243,8 @@
 					<img class="splash" height="480" data-src="images/current-infra.png" alt="Current Setup Diagram">
 					<aside class="notes">
 							<ul>
-								<li>3 node cluster</li>
+								<li>4 node cluster with 1 proxy and 3 dbs</li>
+								<li>The proxy node acts as an optimiser that reduces intra-cluster traffic</li>
 								<li>Around 500k documents stored</li>
 								<li>Usage of Changefeeds for Analytics</li>
 							</ul>
@@ -254,14 +255,19 @@
 					<img class="splash" height="110" data-src="images/lessons.png" alt="Lessons Learned!">
 					<ul>
 						<li>Use secondary indexes and getAll()</li>
-						<li>Do not use innerJoin()</li>
+						<li>Avoid innerJoin() and outerJoin()</li>
 						<li>Nested vs Relational</li>
 						<li>r.http()</li>
 					</ul>
 					<aside class="notes">
 						<ul>
-							<li></li>
-							
+							<li>Whenever possible user secondary indexes and getAll over filter</li>
+							<li>With the relatively cheap cost of increased storage required and write speed, you get drastically improved query times</li>
+							<li>Use these eagerly to make your system as fast as possible</li>
+							<li>Avoid the use of innerJoin() and outerJoin()</li>
+							<li>It is misleading that these are part of the API as they are very slow functions</li>
+							<li>It is hard to decide when to use nested data or relational data, and where the boundary is, especially as your database grows</li>
+							<li>r.http() is a great function for prototyping and working with APIs, worth checking out!</li>
 						</ul>
 					</aside>
 				</section>
