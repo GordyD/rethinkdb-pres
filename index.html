@@ -54,23 +54,11 @@
 							<li>I'm Gordon, CTO of Workshape.io</li>
 							<li>I'm here to talk to you about our experiences at Workshape.io with RethinkDB</li>
 							<li>You can find me on twitter @GordyMD and on Github at @GordyD</li>
-						</ul>
-					</aside>
-				</section>
-
-				<section>
-					<img class="splash" height="150" data-src="images/banner-reversed.png" alt="Workshape.io">
-					<ul>
-						<li>Launched in late 2014</li>
-						<li>Hiring platform for Engineers</li>
-						<li>Uses RethinkDB since prototype</li>
-					</ul>
-					<aside class="notes">
-						<ul>
-							<li>Rethinking hiring</li>
-							<li>Born out of the collective frustration we’ve had with hiring and being hired</li>
-							<li>We are a talent matching platform for sofrware engineers</li>
-							<li>We optimise the initial hiring conversation by matching developer to opportunity based on what they want to do next</li>
+							<li>As an overview I am going to talk</li>
+							<li>about who we are, who i am</li>
+							<li>why we chose RethinkDB</li>
+							<li>how we currently use RethinkDB</li>
+							<li>how we intend to use RethinkDB in the future</li>
 						</ul>
 					</aside>
 				</section>
@@ -78,10 +66,29 @@
 					<img class="splash" height="110" data-src="images/setting-scene.png" alt="Setting the Scene">
 					<aside class="notes">
 						<ul>
-							<li>Before starting Workshape.io I was...</li>
-							<li>Predominantely SQL oriented developer, with an increasing frustration towards ORMs</li>
-							<li>The rigidity of SQL databases and normalised databases and effect on velocity</li>
-							<li>But did not see the NoSQL options like MongoDB/Couchbase as viable options - poor Query language, non-relational</li>
+							<li>Been a Software Engineer for 10 years</li>
+							<li>Predominantely SQL oriented developer, with PostgreSQL, MySQL</li>
+							<li>With an increasing frustration towards ORMs</li>
+							<li>Also grown wary of SQL databases and effect on early start-up velocity</li>
+							<li>And horizontal scalingy</li>
+							<li>But hesitant to adopt NoSQL - MongoDB/Couchbase as viable options</li>
+							<li>Due to poor Query language, non-relational</li>
+						</ul>
+					</aside>
+				</section>
+				<section>
+					<img class="splash" height="150" data-src="images/banner-reversed.png" alt="Workshape.io">
+					<ul>
+						<li>Hiring plaform for Engineers</li>
+						<li>Idea in 2013 / Launch in 2014</li>
+						<li>14k engineers / 500 companies</li>
+					</ul>
+					<aside class="notes">
+						<ul>
+							<li>We're rethinking hiring</li>
+							<li>Born out of the collective frustration we’ve had with hiring and being hired</li>
+							<li>We are a talent matching platform for sofrware engineers</li>
+							<li>We optimise the initial hiring conversation by matching developer to opportunity based on what they want to do next</li>
 						</ul>
 					</aside>
 				</section>
@@ -89,9 +96,12 @@
 					<img class="splash" height="110" data-src="images/new-beginning.png" alt="A New Beginning">
 					<aside class="notes">
 						<ul>
-							<li>Developer Experience</li>
-							<li>Fast Iteration</li>
+							<li>Fresh from our experiences in other startups</li>
+							<li>Key factors to us all in choosing technology were:</li>
 							<li>Flexibility<li>
+							<li>Fast Iteration</li>
+							<li>Fun!</li>
+							<li>All without sacrificing power!</li>
 						</ul>
 					</aside>
 				</section>
@@ -117,9 +127,11 @@
 					</div>
 					<aside class="notes">
 						<ul>
-							<li>A number of options on table</li>
-							<li>Relational, document, graph and and key value stores</li>
-							<li>But with the key focus on Developer Experience and fast iteration</li>
+							<li>The database market is a crowded space</li>
+							<li>With Relational, document, graph based and and key value stores out there</li>
+							<li>A lot choice on the table</li>
+							<li>But with our key focuses</li>
+							<li>RethinkDB stood out</li>
 						</ul>
 					</aside>
 				</section>
@@ -128,9 +140,11 @@
 					<img class="splash" height="550" data-src="images/screen-shot.png" alt="Wayback then!">
 					<aside class="notes">
 						<ul>
-							<li>In mid to late 2013 when Workshape was first conceived. The RethinkDB homepage looked like this...</li>
-							<li>On trialling other options and evaluating based on the principles stated before</li>
-							<li>RethinkDB struck a chord, not just with it's powerful name, but with its features that focussed on improving my experience as an engineer, especially on a new prototype</li>
+							<li>Back then the RethinkDB homepage looked like this...</li>
+							<li>Website that spoke to me as an engineer and showed me the key facets of the DB</li>
+							<li>Really outlined key factors and convinced me to try it out and get a feel for it</li>
+							<li>The focus on Developer Experience was a key component</li>
+							<li>Let's talk about some of it's key features</li>
 						</ul>
 					</aside>
 				</section>
@@ -140,8 +154,7 @@
 					<aside class="notes">
 						<ul>
 							<li>One of the core tennants of document stores is that you can store whatever documents you want, with any structure</li>
-							<li>The lack of requirement to reason ahead of time about data modelling was a strong component of all document stores</li>
-							
+							<li>The lack of requirement to reason ahead of time about data modelling was a strong initial consideration for us</li>
 						</ul>
 					</aside>
 				</section>
@@ -227,16 +240,13 @@
 
 				<section>
 					<img class="splash" height="110" data-src="images/current-setup.png" alt="Out Current Setup!">
-					<ul>
-						<li>3 node cluster</li>
-						<li>Around 500k documents stored</li>
-						<li>Usage of Changefeeds for Analytics</li>
-					</ul>
+					<img class="splash" height="480" data-src="images/current-infra.png" alt="Current Setup Diagram">
 					<aside class="notes">
-						<ul>
-							<li></li>
-							
-						</ul>
+							<ul>
+								<li>3 node cluster</li>
+								<li>Around 500k documents stored</li>
+								<li>Usage of Changefeeds for Analytics</li>
+							</ul>
 					</aside>
 				</section>
 
@@ -245,8 +255,7 @@
 					<ul>
 						<li>Use secondary indexes and getAll()</li>
 						<li>Do not use innerJoin()</li>
-						<li>Run 3 servers for High Availability</li>
-						<li>&gt;2 GB RAM</li>
+						<li>Nested vs Relational</li>
 						<li>r.http()</li>
 					</ul>
 					<aside class="notes">
@@ -262,15 +271,24 @@
 					<img class="splash" height="550" data-src="images/screen-shot2.png" alt="Right now!">
 					<aside class="notes">
 						<ul>
-							<li></li>
-							
+							<li>This is RethinkDB today</li>
+							<li>With the focus shifted towards the realtime capabilities</li>
 						</ul>
 					</aside>
 				</section>
 
 				<section>
 					<img class="splash" height="110" data-src="images/changefeed-api.png" alt="Changefeed API">
-					
+					<pre><code class="javascript hljs">
+  db.changes(
+    r.table('account').filter({type: 'person'}),
+    function(err, x) {
+      if (!x.old_val) {
+        emit('new-person', x.new_val);
+      }
+    }
+  );
+					</code></pre>
 					<aside class="notes">
 						<ul>
 							<li>The introduction of Changefeeds, which at first was meant for integration for other realtime systems, was a very exciting development</li>
