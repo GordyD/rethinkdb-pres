@@ -13,7 +13,8 @@
 		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-
+		
+		<link rel="stylesheet" href="fonts/stylesheet.css">
 		<link rel="stylesheet" href="css/reveal.css">
 		<link rel="stylesheet" href="css/theme/white.css" id="theme">
 		<link rel="stylesheet" href="css/pres.css">
@@ -52,13 +53,14 @@
 						<ul>
 							<li>Welcome</li>
 							<li>I'm Gordon, CTO of Workshape.io</li>
-							<li>I'm here to talk to you about our experiences at Workshape.io with RethinkDB</li>
-							<li>You can find me on twitter @GordyMD and on Github at @GordyD</li>
-							<li>As an overview I am going to talk</li>
-							<li>about who we are, who i am</li>
+							<li>I'm here to talk to you about our experiences of using RethinkDB in production</li>
+							<li>As an overview I am going to talk about:</li>
+							<li>Who I am</li>
+							<li>What Workshape is</li>
 							<li>why we chose RethinkDB</li>
 							<li>how we currently use RethinkDB</li>
 							<li>how we intend to use RethinkDB in the future</li>
+							<li>You can find me on twitter @GordyMD if you want to connect</li>
 						</ul>
 					</aside>
 				</section>
@@ -67,24 +69,29 @@
 					<aside class="notes">
 						<ul>
 							<li>Been a Software Engineer for 10 years</li>
-							<li>Predominantely SQL oriented developer, with PostgreSQL, MySQL</li>
-							<li>With an increasing frustration towards ORMs</li>
-							<li>Also grown wary of SQL databases and effect on early start-up velocity</li>
-							<li>And horizontal scalingy</li>
-							<li>But hesitant to adopt NoSQL - MongoDB/Couchbase as viable options</li>
-							<li>Due to poor Query language, non-relational</li>
+							<li>Most of my time has been spent working with PostgreSQL, MySQL powered applications</li>
+							<li>Grown an increasing frustration RDBMS and issues around the use of ORMs and performing migrations and scaling up a DB</li>
+							<li>Previously was hesitant to adopt NoSQL - MongoDB/Couchbase as viable options</li>
+							<li>Due to Poor Query language, non-relational</li>
 						</ul>
 					</aside>
 				</section>
 				<section>
 					<img class="splash" height="150" data-src="images/banner-reversed.png" alt="Workshape.io">
 					<ul>
-						<li>Hiring plaform for Engineers</li>
+						<li>Hiring platform for Engineers</li>
 						<li>Idea in 2013 / Launch in 2014</li>
 						<li>14k engineers / 500 companies</li>
+						<li>15% growth month-on-month</li>
 					</ul>
+					<div>
+						<img class="splash portrait" height="130" data-src="images/gordon.png" alt="Workshape.io">
+						<img class="splash portrait" height="130" data-src="images/hung.png" alt="Workshape.io">
+						<img class="splash portrait" height="130" data-src="images/tanc.png" alt="Workshape.io">
+					</div>
 					<aside class="notes">
 						<ul>
+							<li>Founded by myself, Tancredi, Hung, we met at a previous startup</li>
 							<li>We're rethinking hiring</li>
 							<li>Born out of the collective frustration we’ve had with hiring and being hired</li>
 							<li>We are a talent matching platform for sofrware engineers</li>
@@ -211,6 +218,7 @@
 						<li>Horizontal Scaling</li>
 						<li>Geospatial Functionality</li>
 						<li>Powerful GUI</li>
+						<li>r.http()</li>
 					</ul>
 					<aside class="notes">
 						<ul>
@@ -239,14 +247,28 @@
 				</section>
 
 				<section>
-					<img class="splash" height="110" data-src="images/current-setup.png" alt="Out Current Setup!">
+					<img class="splash" height="110" data-src="images/current-setup.png" alt="Out Current Setup">
 					<img class="splash" height="480" data-src="images/current-infra.png" alt="Current Setup Diagram">
 					<aside class="notes">
 							<ul>
 								<li>4 node cluster with 1 proxy and 3 dbs</li>
 								<li>The proxy node acts as an optimiser that reduces intra-cluster traffic</li>
+							</ul>
+					</aside>
+				</section>
+
+				<section>
+					<img class="splash" height="110" data-src="images/current-usage.png" alt="Out Current Usage">
+					<img class="splash" height="550" data-src="images/gui.png" alt="GUI Screenshot">
+					<aside class="notes">
+							<ul>
+								<li>This is a recent screenshot taken showing the admin tool reporting clister performance information</li>
+								<li>You can see from the graph we are read heavy, like most web applications</li>
+								<li>Our database is stil relatively small with around 2.2GB of disk used</li>
+								<li>We have 21 tables</li>
 								<li>Around 500k documents stored</li>
-								<li>Usage of Changefeeds for Analytics</li>
+								<li>We use 31 different secondary on-top of the default primary ones that exist to optimise certain queries</li>
+								<li>The benefits of this are reaped in our matching algorithm where use a geo based secondary index for quickly focussing the match algorithm upon a subset of matches able looking for work in the area</li>
 							</ul>
 					</aside>
 				</section>
@@ -257,7 +279,6 @@
 						<li>Use secondary indexes and getAll()</li>
 						<li>Avoid innerJoin() and outerJoin()</li>
 						<li>Nested vs Relational</li>
-						<li>r.http()</li>
 					</ul>
 					<aside class="notes">
 						<ul>
@@ -334,13 +355,14 @@
 						<ul>
 							<li>I wrote a blog post a few weeks ago about a potential stack that we are looking to adopt.</li>
 							<li>It brings together the 3 Re's of the Javascript world that all have strong focus on Developer Experience</li>
-							<li>With this being something we attach a lot of importance in. We are very excited to begin refactoring towards this approach.</li>
+							<li>With this being something we attach a lot of importance in.</li>
+							<li>We are very excited to begin refactoring towards this approach.</li>
 						</ul>
 					</aside>
 				</section>
 
 				<section>
-					<h2>Thank you</h2>
+					<h3 class="lowercase">Thank you for listening</h3>
 					<p>
 						<small><a href="http://www.gordondent.co.uk">Gordon Dent</a> / <a href="http://www.workshape.io">workshape.io</a> / <a href="http://twitter.com/gordymd">@gordyMD</a></small>
 
