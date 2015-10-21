@@ -103,9 +103,9 @@
 					<img class="splash" height="110" data-src="images/new-beginning.png" alt="A New Beginning">
 					<aside class="notes">
 						<ul>
-							<li>Fresh from our experiences in other startups</li>
-							<li>Key factors to us all in choosing technology were:</li>
-							<li>Flexibility<li>
+							<li>Fresh from our experiences in other London startups</li>
+							<li>Key factors to us all in choosing technology and setting company culture were:</li>
+							<li>Flexibility</li>
 							<li>Fast Iteration</li>
 							<li>Fun!</li>
 							<li>All without sacrificing power!</li>
@@ -147,11 +147,11 @@
 					<img class="splash" height="550" data-src="images/screen-shot.png" alt="Wayback then!">
 					<aside class="notes">
 						<ul>
-							<li>Back then the RethinkDB homepage looked like this...</li>
+							<li>Back in 2013  when were prototyping the RethinkDB homepage looked like this...</li>
 							<li>Website that spoke to me as an engineer and showed me the key facets of the DB</li>
 							<li>Really outlined key factors and convinced me to try it out and get a feel for it</li>
 							<li>The focus on Developer Experience was a key component</li>
-							<li>Let's talk about some of it's key features</li>
+							<li>Let's talk about some of it's key features that sealed the deal...</li>
 						</ul>
 					</aside>
 				</section>
@@ -217,11 +217,11 @@
 					<ul>
 						<li>Horizontal Scaling</li>
 						<li>Geospatial Functionality</li>
-						<li>Powerful GUI</li>
-						<li>r.http()</li>
+						<li>Powerful Admin Tool</li>
 					</ul>
 					<aside class="notes">
 						<ul>
+							<li>Other components that influenced our decision were...</li>
 							<li>The ease of scaling was another worthy highlight but not immediate to our concerns</li>
 							<li>Although, having experience scaling up MySQL and PostgreSQL clusters, the simplicity of this is incredible</li>
 							<li>Geospatial functionality being present was very important for leveraging ReQL to handle the weight of our matching algorithm</li>
@@ -229,13 +229,13 @@
 						</ul>
 					</aside>
 				</section>
-				<section>
-					<img class="splash" height="350" data-src="images/dx.png" alt="Developer Experience!" data-autoslide="2450" data-fragment-index="1">
-					<img class="splash dx1 fragment" height="30" data-src="images/Community.png" alt="Developer Experience!"  data-autoslide="850" data-fragment-index="2">
-					<img class="splash dx2 fragment" height="30" data-src="images/Support.png" alt="Developer Experience!"  data-autoslide="850" data-fragment-index="3">
-					<img class="splash dx3 fragment" height="30" data-src="images/Usability.png" alt="Developer Experience!"  data-autoslide="850" data-fragment-index="4">
-					<img class="splash dx4 fragment" height="25" data-src="images/Education.png" alt="Developer Experience!"  data-autoslide="850" data-fragment-index="5">
-					<img class="splash dx5 fragment" height="25" data-src="images/Documentation.png" alt="Developer Experience!"  data-autoslide="30050" data-fragment-index="6">
+				<section  data-autoslide="2500">
+					<img class="splash" height="350" data-src="images/dx.png" alt="Developer Experience!">
+					<img class="splash dx1 fragment" height="30" data-src="images/Community.png" alt="Developer Experience!"  data-autoslide="850" data-fragment-index="1">
+					<img class="splash dx2 fragment" height="30" data-src="images/Support.png" alt="Developer Experience!"  data-autoslide="850" data-fragment-index="2">
+					<img class="splash dx3 fragment" height="30" data-src="images/Usability.png" alt="Developer Experience!"  data-autoslide="850" data-fragment-index="3">
+					<img class="splash dx4 fragment" height="25" data-src="images/Education.png" alt="Developer Experience!"  data-autoslide="850" data-fragment-index="4">
+					<img class="splash dx5 fragment" height="25" data-src="images/Documentation.png" alt="Developer Experience!"  data-autoslide="30050" data-fragment-index="5">
 					<aside class="notes">
 						<ul>
 							<li>It was clear to me that Developer Experience was at the heart of RethinkDB</li>
@@ -245,18 +245,32 @@
 						</ul>
 					</aside>
 				</section>
-
 				<section>
-					<img class="splash" height="110" data-src="images/current-setup.png" alt="Out Current Setup">
+					<img class="splash" height="110" data-src="images/first-setup.png" alt="Our First Setup">
+					<img class="splash" height="480" data-src="images/old-infra.png" alt="First Setup Diagram">
+					<ul>
+					</ul>
+					<aside class="notes">
+							<ul>
+								<li>Our first setup was initially in Amsterdam, because Digital Ocean did not have a London data-center</li>
+								<li>We ran a 2 node cluster for RethinkDB with one box just operating as a DB server</li>
+								<li>And another operating as a worker and backup manager</li>
+								<li>We set up our infrastructure using IP tables, as specified in RethinkDBs docs</li>
+								<li>We use ansible to orchestrate our setup</li>
+							</ul>
+					</aside>
+				</section>
+				<section>
+					<img class="splash" height="110" data-src="images/current-setup.png" alt="Our Current Setup">
 					<img class="splash" height="480" data-src="images/current-infra.png" alt="Current Setup Diagram">
 					<aside class="notes">
 							<ul>
+								<li>Whereas today we are hosted in London</li>
 								<li>4 node cluster with 1 proxy and 3 dbs</li>
 								<li>The proxy node acts as an optimiser that reduces intra-cluster traffic</li>
 							</ul>
 					</aside>
 				</section>
-
 				<section>
 					<img class="splash" height="110" data-src="images/current-usage.png" alt="Out Current Usage">
 					<img class="splash" height="550" data-src="images/gui.png" alt="GUI Screenshot">
@@ -276,12 +290,15 @@
 				<section>
 					<img class="splash" height="110" data-src="images/lessons.png" alt="Lessons Learned!">
 					<ul>
+						<li>2GB RAM + SWAP</li>
 						<li>Use secondary indexes and getAll()</li>
 						<li>Avoid innerJoin() and outerJoin()</li>
 						<li>Nested vs Relational</li>
 					</ul>
 					<aside class="notes">
 						<ul>
+							<li>One of the rookie mistakes when setting up our DB servers the first time was not setting up swap!</li>
+							<li>More of an issue with cloud services than rethinkDB but important if you don't want your process to crash when mem runs out!</li>
 							<li>Whenever possible user secondary indexes and getAll over filter</li>
 							<li>With the relatively cheap cost of increased storage required and write speed, you get drastically improved query times</li>
 							<li>Use these eagerly to make your system as fast as possible</li>
